@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+    dev:
+        container_name: nest-auth-dev
+        image: nest-auth
+        build:
+            context: .
+            target: development
+            dockerfile: ./Dockerfile
+        command: npm run start:dev
+        ports:
+            - 3000:3000
+        networks:
+            - nesjs-network
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules
+        restart: unless-stopped
+
+networks:
+    nesjs-network:
